@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pais"
+            type="es.jacampillo.avancedelcovid.model.Pais" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="2dp"
+
+        app:cardBackgroundColor="#C8CDC2"
+        app:cardCornerRadius="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="12dp"
+                app:imgUrl="@{pais.countryInfo.flag}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tv1"
+                style="@style/TextviewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{pais.country}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--            app:positivos="@{pais}"-->
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/TextviewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv1"
+
+                android:text='@{String.format("%d Tests positivos", pais.cases)}' />
+
+            <TextView
+                android:id="@+id/tv3"
+                style="@style/TextviewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv2"
+
+                android:text='@{String.format("%d Recuperados", pais.recovered)}' />
+
+            <TextView
+                android:id="@+id/tv4"
+                style="@style/TextviewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv3"
+
+                android:text='@{String.format("%d Fallecidos", pais.deaths)}' />
+
+            <TextView
+                android:id="@+id/tv5"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv4"
+
+                android:text='@{String.format("%d En estado grave", pais.critical)}' />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+
