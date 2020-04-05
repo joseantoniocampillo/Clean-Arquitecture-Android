@@ -7,7 +7,7 @@
 
         <variable
             name="pais"
-            type="es.jacampillo.avancedelcovid.model.Pais" />
+            type="es.jacampillo.avancedelcovid.models_api_response.Pais" />
 
     </data>
 
@@ -29,6 +29,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="40dp"
+                android:contentDescription="@string/bandera_del_pais"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="12dp"
                 app:imgUrl="@{pais.countryInfo.flag}"

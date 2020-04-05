@@ -1,7 +1,15 @@
-package es.jacampillo.avancedelcovid.model
+package es.jacampillo.avancedelcovid.models_api_response
+
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
-import es.jacampillo.avancedelcovid.model.CountryInfo
+
+/*
+* Clase generada con el plugin de Android Studio
+* que genera un kotlin file (con un data class)
+* Al encontror otro json dentro jenera automáticamente
+* otro archivo para este nuevo json (interior).
+* Obviamente le da el nombre que encuentra en este caso en inglés CountryInfo
+*/
 
 @Keep
 data class Pais(
@@ -12,7 +20,7 @@ data class Pais(
     @SerializedName("casesPerOneMillion")
     var casesPerOneMillion: Double?,
     @SerializedName("country")
-    var country: String?,
+    var country: String,
     @SerializedName("countryInfo")
     var countryInfo: CountryInfo?,
     @SerializedName("critical")

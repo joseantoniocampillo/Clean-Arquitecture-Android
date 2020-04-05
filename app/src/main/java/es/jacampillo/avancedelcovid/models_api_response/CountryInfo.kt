@@ -1,4 +1,4 @@
-package es.jacampillo.avancedelcovid.model
+package es.jacampillo.avancedelcovid.models_api_response
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
@@ -17,4 +17,6 @@ data class CountryInfo(
     var lat: Double?,
     @SerializedName("long")
     var long: Double?
-)
+) {
+    constructor(flag: String?) : this(flag, null,null,null,null,null)
+}

@@ -1,25 +1,40 @@
 package es.jacampillo.avancedelcovid.ui.main
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import es.jacampillo.avancedelcovid.model.Pais
+import androidx.lifecycle.*
+import es.jacampillo.avancedelcovid.database.getDatabase
+import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.network.PaisesApi
+import es.jacampillo.avancedelcovid.repo.Repositorio
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
 
-class MainViewModel : ViewModel() {
+class MainViewModel (application: Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _paises = MutableLiveData<List<Pais>>()
-    val paises : LiveData<List<Pais>> get() = _paises
+//    val paises : LiveData<List<Pais>> get() = _paises
+
+    private val paisesRepositorio = Repositorio(getDatabase(application))
+    val paises = paisesRepositorio.listapaises
 
     init {
-        networkCall()
+        //networkCall()
+        refreshFromRepository()
+    }
+
+    private fun refreshFromRepository(){
+        coroutineScope.launch {
+            try {
+                paisesRepositorio.refreshPaises()
+            } catch (e: HttpException){
+                Log.d("error_ttt", e.message())
+            }
+        }
     }
 
     private fun networkCall(){
@@ -29,8 +44,7 @@ class MainViewModel : ViewModel() {
                 val lista = paisesDeferred.await()
                 _paises.value = lista
             } catch (e: HttpException){
-                //Timber.d("ttt_ ") todo()
-                Log.e("error_ttt", e.localizedMessage)
+                Log.d("error_ttt", e.message())
             }
         }
     }
@@ -38,6 +52,16 @@ class MainViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 
 }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.jacampillo.avancedelcovid.databinding.PaisViewItemBinding
-import es.jacampillo.avancedelcovid.model.Pais
+import es.jacampillo.avancedelcovid.models_api_response.Pais
 
 class PaisesAdapter : ListAdapter<Pais, PaisesAdapter.PaisViewHolder>(DiffCallback){
 
