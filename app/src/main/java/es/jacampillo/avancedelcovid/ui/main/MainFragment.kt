@@ -45,8 +45,11 @@ class MainFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.item_actualizar -> viewmodel.listanormal()
-            R.id.item_ord_fallecidos -> viewmodel.lista2()
+            R.id.item_actualizar -> viewmodel.listanormal();
+            R.id.item_ord_fallecidos -> {
+                viewmodel.lista2()
+                activity?.title = viewmodel.paisesOrdenados.value?.get(0)?.updated?.toDateFormat() + " Ord Fallecidos"
+            }
         }
         return true
     }
