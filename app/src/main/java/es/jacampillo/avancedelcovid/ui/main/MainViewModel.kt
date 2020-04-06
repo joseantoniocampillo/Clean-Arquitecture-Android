@@ -11,39 +11,47 @@ import kotlinx.coroutines.*
 import retrofit2.HttpException
 
 
-class MainViewModel (application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val _paises = MutableLiveData<List<Pais>>()
-//    val paises : LiveData<List<Pais>> get() = _paises
-
     private val paisesRepositorio = Repositorio(getDatabase(application))
-    val paises = paisesRepositorio.listapaises
 
-    init {
-        //networkCall()
-        refreshFromRepository()
-    }
+    private val _entrada = MutableLiveData<Int>()
+    private val entrada : LiveData<Int> get() = _entrada
 
-    private fun refreshFromRepository(){
-        coroutineScope.launch {
-            try {
-                paisesRepositorio.refreshPaises()
-            } catch (e: HttpException){
-                Log.d("error_ttt", e.message())
-            }
+    private fun obtenerLista(codigo: Int): LiveData<List<Pais>>{
+        return when (codigo) {
+            1 -> paisesRepositorio.listapaises
+            2 -> paisesRepositorio.ordenadosFallecidos
+            else -> paisesRepositorio.listapaises
         }
     }
 
-    private fun networkCall(){
+    val paisesOrdenados = Transformations.switchMap(entrada){
+        obtenerLista(it)
+    }
+
+    fun listanormal(){
+        _entrada.value = 1
+    }
+    fun lista2(){
+        _entrada.value = 2
+    }
+
+
+    init {
+        refreshFromRepository()
+        _entrada.value = 1
+        Log.d("ttt_init", paisesOrdenados.value?.get(0)?.country ?: "null ")
+    }
+
+    private fun refreshFromRepository() {
         coroutineScope.launch {
-            val paisesDeferred = PaisesApi.retrofitService.getCountries()
             try {
-                val lista = paisesDeferred.await()
-                _paises.value = lista
-            } catch (e: HttpException){
+                paisesRepositorio.refreshPaises()
+            } catch (e: HttpException) {
                 Log.d("error_ttt", e.message())
             }
         }

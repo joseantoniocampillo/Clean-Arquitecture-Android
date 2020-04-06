@@ -2,4 +2,6 @@
     <string name="app_name">Covid-19</string>
     <string name="image_view_description">Foto del pais en cuestion</string>
     <string name="bandera_del_pais">Bandera del país</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="ordenar_por_fallecidos">Ordenar por fallecidos</string>
 </resources>

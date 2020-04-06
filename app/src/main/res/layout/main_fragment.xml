@@ -17,7 +17,7 @@
         tools:context=".ui.main.MainFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            app:listDatos="@{viewmodelo.paises}"
+            app:listDatos="@{viewmodelo.paisesOrdenados}"
             android:id="@+id/paises_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/actualizar"
+        android:id="@+id/item_actualizar"/>
+    <item android:title="@string/ordenar_por_fallecidos"
+        android:id="@+id/item_ord_fallecidos"/>
+</menu>

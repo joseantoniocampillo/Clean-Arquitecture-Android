@@ -7,8 +7,12 @@ import androidx.room.*
 @Dao
 interface PaisesDao {
 
-    @Query("select * from databasepais")
+    @Query("select * from databasepais order by cases desc")
     fun getPaises(): LiveData<List<DatabasePais>>
+
+    @Query("select * from databasepais order by deaths desc")
+    fun getOrdenadosFallecidos(): LiveData<List<DatabasePais>>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPaises(paises: List<DatabasePais>)

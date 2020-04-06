@@ -25,6 +25,10 @@ class Repositorio (private val database: PaisesDatabase) {
         }
     }
 
+    val ordenadosFallecidos: LiveData<List<Pais>> = Transformations
+        .map(database.paisesDao.getOrdenadosFallecidos()){
+            it.asPaisDomain()
+        }
     val listapaises: LiveData<List<Pais>> = Transformations
         .map(database.paisesDao.getPaises()){
             it.asPaisDomain()
