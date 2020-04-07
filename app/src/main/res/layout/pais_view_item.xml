@@ -14,31 +14,31 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
 
-        app:cardBackgroundColor="#C8CDC2"
-        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#EBEFE6"
+        app:cardCornerRadius="4dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:contentDescription="@string/bandera_del_pais"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="12dp"
+                android:contentDescription="@string/bandera_del_pais"
                 app:imgUrl="@{pais.countryInfo.flag}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
                 android:id="@+id/tv1"
                 style="@style/TextviewStyle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{pais.country}"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,16 +48,16 @@
             <TextView
                 android:id="@+id/tv2"
                 style="@style/TextviewStyle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv1"
 
-                android:text='@{String.format("%d Tests positivos", pais.cases)}' />
+                android:text='@{String.format("%d Positivos", pais.cases)}' />
 
             <TextView
                 android:id="@+id/tv3"
                 style="@style/TextviewStyle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
 
@@ -66,7 +66,7 @@
             <TextView
                 android:id="@+id/tv4"
                 style="@style/TextviewStyle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv3"
 
@@ -78,8 +78,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
-
                 android:text='@{String.format("%d En estado grave", pais.critical)}' />
+
+            <TextView
+                android:id="@+id/tv6"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv5"
+                android:text='@{String.format("%d Fallecidos hoy", pais.todayDeaths)}' />
+
+            <TextView
+                android:id="@+id/tv7"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv6"
+                android:text='@{String.format("%d Test", pais.tests)}' />
+
+            <TextView
+                android:id="@+id/tv8"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv7"
+                android:text='@{String.format("%d Test por millón", pais.testsPerOneMillion)}' />
+
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
