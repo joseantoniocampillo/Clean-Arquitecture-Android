@@ -36,5 +36,14 @@ data class Pais(
     @SerializedName("todayDeaths")
     var todayDeaths: Int?,
     @SerializedName("updated")
-    var updated: Long?
+    var updated: Long?,
+    @SerializedName("tests")
+    var tests: Long?,
+    @SerializedName("testsPerOneMillion")
+    var testsPerOneMillion: Int?
+
+
 )
+
+//tests: 2011529,
+//testsPerOneMillion: 6077

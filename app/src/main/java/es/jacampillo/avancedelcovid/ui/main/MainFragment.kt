@@ -10,6 +10,20 @@ import es.jacampillo.avancedelcovid.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
 
+    companion object {
+        val FALLECIDOS = R.id.item_ord_fallecidos
+        val POSITIVOS = R.id.item_actualizar
+        val FALLECIDOS_HOY =R.id.item_ord_fallecidos_hoy
+        val RECUPERADOS =R.id.item_ord_recuperados
+        val GRAVES =R.id.item_ord_graves
+        val TEST =R.id.item_ord_test
+        val TEST_POR_MILLON =R.id.item_ord_test_por_millon
+    }
+
+    init {
+
+    }
+
     private val viewmodel: MainViewModel by lazy {
         val activity = requireNotNull(this.activity)
         val factory = MainViewModel.Factory(activity.application)

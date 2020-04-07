@@ -21,16 +21,11 @@ class Repositorio (private val database: PaisesDatabase) {
             } catch (e: Exception){
                 Log.d("error_ttt_repositorio", e.localizedMessage?: e.toString())
             }
-
         }
     }
 
-    val ordenadosFallecidos: LiveData<List<Pais>> = Transformations
-        .map(database.paisesDao.getOrdenadosFallecidos()){
-            it.asPaisDomain()
-        }
-    val listapaises: LiveData<List<Pais>> = Transformations
-        .map(database.paisesDao.getPaises()){
+    fun listaSelecionada(int: Int) = Transformations
+        .map(database.paisesDao.getFromDatabase(int)){
             it.asPaisDomain()
         }
 }

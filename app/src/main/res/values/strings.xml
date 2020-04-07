@@ -3,5 +3,11 @@
     <string name="image_view_description">Foto del pais en cuestion</string>
     <string name="bandera_del_pais">Bandera del país</string>
     <string name="actualizar">Actualizar</string>
-    <string name="ordenar_por_fallecidos">Ordenar por fallecidos</string>
+    <string name="ordenar_por_fallecidos">… Fallecidos</string>
+    <string name="ordenar_por_fallecidos_hoy">… Fallecidos Hoy</string>
+    <string name="ordenar_por_recuperados">… Recuperados</string>
+    <string name="ordenar_por_graves">… Graves</string>
+    <string name="ordenar_por_test">… Test</string>
+    <string name="ordenar_por_test_por_millon">… Test por Millón</string>
+    <string name="ordenar_por_positivos">Ordenar por Positivos</string>
 </resources>

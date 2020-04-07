@@ -35,8 +35,16 @@ class DatabasePais constructor(
     @SerializedName("cases")
     var cases: Int?,
     @SerializedName("casesPerOneMillion")
-    var casesPerOneMillion: Double?
+    var casesPerOneMillion: Double?,
+    @SerializedName("tests")
+    var tests: Long?,
+    @SerializedName("testsPerOneMillion")
+    var testsPerOneMillion: Int?
 )
+
+
+//tests: 2011529,
+//testsPerOneMillion: 6077
 
 fun List<DatabasePais>.asPaisDomain(): List<Pais>{
     return map {
@@ -52,7 +60,9 @@ fun List<DatabasePais>.asPaisDomain(): List<Pais>{
             updated = it.updated,
             active = it.active,
             cases = it.cases,
-            casesPerOneMillion = it.casesPerOneMillion
+            casesPerOneMillion = it.casesPerOneMillion,
+            tests = it.tests,
+            testsPerOneMillion = it.testsPerOneMillion
         )
     }
 }
@@ -71,7 +81,9 @@ fun List<Pais>.asDatabasePaises(): List<DatabasePais>{
             updated = it.updated,
             active = it.active,
             cases = it.cases,
-            casesPerOneMillion = it.casesPerOneMillion
+            casesPerOneMillion = it.casesPerOneMillion,
+            tests = it.tests,
+            testsPerOneMillion = it.testsPerOneMillion
         )
     }
 }

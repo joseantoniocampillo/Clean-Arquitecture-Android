@@ -10,6 +10,8 @@ import es.jacampillo.avancedelcovid.toDateFormat
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import es.jacampillo.avancedelcovid.R
+import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS
+import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.POSITIVOS
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -20,13 +22,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _selection = MutableLiveData<Int>()
     private val selection: LiveData<Int> get() = _selection
 
-    private fun obtenerLista(codigo: Int): LiveData<List<Pais>> {
-        return when (codigo) {
-            R.id.item_actualizar -> paisesRepositorio.listapaises
-            R.id.item_ord_fallecidos -> paisesRepositorio.ordenadosFallecidos
-            else -> paisesRepositorio.listapaises
-        }
-    }
+    private fun obtenerLista(codigo: Int): LiveData<List<Pais>> =
+        paisesRepositorio.listaSelecionada(codigo)
 
     val paisesOrdenados = Transformations.switchMap(selection) {
         // Esta función nos devuelve el liveData que representa paisesOrdenados
@@ -34,15 +31,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         obtenerLista(it)
     }
 
-    val titulo = Transformations.map(paisesOrdenados) {
+    val titulo : LiveData<String> = Transformations.map(paisesOrdenados) {
+        var control = ""
         it?.let{
-            val actualizado = it.get(0).updated?.toDateFormat()
-            when (selection.value){
-                R.id.item_actualizar -> String.format("%s Ord Positivos", actualizado)
-                R.id.item_ord_fallecidos -> String.format("%s Ord Fallecidos", actualizado)
-                else -> actualizado
+            if (it.size > 0) {
+                val actualizado = it.get(0).updated?.toDateFormat()
+                control = String.format("%s %s", actualizado, orden(selection.value))
             }
         }
+        control
     }
 
     fun updateSelection(int: Int) {
@@ -52,7 +49,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         refreshFromRepository()
-        _selection.value = R.id.item_actualizar
+        _selection.value = POSITIVOS
     }
 
     private fun refreshFromRepository() {
@@ -77,6 +74,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 return MainViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
+        }
+    }
+
+    fun orden(codigo: Int?): String {
+        return when (codigo) {
+            FALLECIDOS -> "Ord Fallecidos"
+            POSITIVOS -> "Ord Positivos"
+            else -> " "
         }
     }
 
