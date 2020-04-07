@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import es.jacampillo.avancedelcovid.R
 import es.jacampillo.avancedelcovid.databinding.MainFragmentBinding
-import es.jacampillo.avancedelcovid.toDateFormat
 
 class MainFragment : Fragment() {
 
@@ -28,11 +27,7 @@ class MainFragment : Fragment() {
         binding.viewmodelo = viewmodel
         binding.paisesRecyclerView.adapter = PaisesAdapter()
 
-        viewmodel.paisesOrdenados.observe(viewLifecycleOwner, Observer {
-            if (it != null && it.size>0){
-                activity?.title = it.get(0).updated?.toDateFormat()
-            }
-        })
+        viewmodel.titulo.observe(viewLifecycleOwner, Observer {activity?.title = it})
 
         setHasOptionsMenu(true)
         return binding.root
@@ -44,13 +39,8 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.item_actualizar -> viewmodel.listanormal();
-            R.id.item_ord_fallecidos -> {
-                viewmodel.lista2()
-                activity?.title = viewmodel.paisesOrdenados.value?.get(0)?.updated?.toDateFormat() + " Ord Fallecidos"
-            }
-        }
+            viewmodel.updateSelection(item.itemId)
+
         return true
     }
 }
