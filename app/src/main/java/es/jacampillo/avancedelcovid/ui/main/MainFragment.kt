@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import es.jacampillo.avancedelcovid.R
 import es.jacampillo.avancedelcovid.databinding.MainFragmentBinding
 
@@ -39,7 +40,16 @@ class MainFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodelo = viewmodel
-        binding.paisesRecyclerView.adapter = PaisesAdapter()
+        binding.paisesRecyclerView.adapter = PaisesAdapter(PaisListener {
+            viewmodel.navegahaciaFuncion(it)
+        })
+
+        viewmodel.navegahacia.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
+                viewmodel.navegacionCompletada()
+            }
+        })
 
         viewmodel.titulo.observe(viewLifecycleOwner, Observer {activity?.title = it})
 

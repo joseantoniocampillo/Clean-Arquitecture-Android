@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.jacampillo.avancedelcovid.models_api_response.Pais
+import es.jacampillo.avancedelcovid.ui.main.MainFragment
 import es.jacampillo.avancedelcovid.ui.main.PaisesAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,9 +43,24 @@ fun bindPositivos(tv : TextView, pais: Pais?){
 
 }
 
+ /*------------------------------ UTILS ......................................*/
+
     //SimpleDateFormat("yyyy.MM.dd HH:mm")
 fun Long.toDateFormat(): String{
     val date = Date(this)
     val format = SimpleDateFormat("HH:mm dd.MM.yy ")
         return format.format(date)
+}
+
+fun orden(codigo: Int?): String {
+    return when (codigo) {
+        MainFragment.FALLECIDOS -> "👓 Fallecidos"
+        MainFragment.POSITIVOS -> "\uD83D\uDC53 Positivos"
+        MainFragment.FALLECIDOS_HOY -> "🎚 Hoy"
+        MainFragment.RECUPERADOS -> "\uD83D\uDC53 ♥ Recuperados"
+        MainFragment.GRAVES -> "💊 Graves"
+        MainFragment.TEST -> "🧪 Test"
+        MainFragment.TEST_POR_MILLON -> "\uD83E\uDDEA Test por 1M"
+        else -> " "
+    }
 }

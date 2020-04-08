@@ -1,8 +1,11 @@
 package es.jacampillo.avancedelcovid.models_api_response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Keep
 data class CountryInfo(
     @SerializedName("flag")
@@ -17,6 +20,6 @@ data class CountryInfo(
     var lat: Double?,
     @SerializedName("long")
     var long: Double?
-) {
+) : Parcelable {
     constructor(flag: String?) : this(flag, null,null,null,null,null)
 }

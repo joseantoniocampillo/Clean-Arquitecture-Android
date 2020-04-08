@@ -10,6 +10,7 @@ import es.jacampillo.avancedelcovid.toDateFormat
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import es.jacampillo.avancedelcovid.R
+import es.jacampillo.avancedelcovid.orden
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS_HOY
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.GRAVES
@@ -67,6 +68,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /*---------------- NAVEGACION -------------------*/
+
+    private val _navegahacia = MutableLiveData<Pais>()
+    val navegahacia: LiveData<Pais> get() = _navegahacia
+
+    fun navegahaciaFuncion(pais: Pais){
+        _navegahacia.value = pais
+    }
+
+    fun navegacionCompletada(){
+        _navegahacia.value = null
+    }
+
+
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -79,19 +95,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 return MainViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
-        }
-    }
-
-    fun orden(codigo: Int?): String {
-        return when (codigo) {
-            FALLECIDOS -> "👓 Fallecidos"
-            POSITIVOS -> "\uD83D\uDC53 Positivos"
-            FALLECIDOS_HOY -> "🎚 Hoy"
-            RECUPERADOS -> "\uD83D\uDC53 ♥ Recuperados"
-            GRAVES -> "💊 Graves"
-            TEST -> "🧪 Test"
-            TEST_POR_MILLON -> "\uD83E\uDDEA Test por 1M"
-            else -> " "
         }
     }
 

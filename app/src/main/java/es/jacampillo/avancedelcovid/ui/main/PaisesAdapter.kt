@@ -1,6 +1,7 @@
 package es.jacampillo.avancedelcovid.ui.main
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.jacampillo.avancedelcovid.databinding.PaisViewItemBinding
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 
-class PaisesAdapter : ListAdapter<Pais, PaisesAdapter.PaisViewHolder>(DiffCallback){
+class PaisesAdapter (val paisListener: PaisListener): ListAdapter<Pais, PaisesAdapter.PaisViewHolder>(DiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaisViewHolder {
         return PaisViewHolder(PaisViewItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -16,6 +17,9 @@ class PaisesAdapter : ListAdapter<Pais, PaisesAdapter.PaisViewHolder>(DiffCallba
 
     override fun onBindViewHolder(holder: PaisViewHolder, position: Int) {
         val pais = getItem(position)
+        holder.itemView.setOnClickListener{
+            paisListener.onClick(pais)
+        }
         holder.bind(pais)
     }
 
@@ -34,5 +38,9 @@ class PaisesAdapter : ListAdapter<Pais, PaisesAdapter.PaisViewHolder>(DiffCallba
             binding.executePendingBindings()
         }
     }
-
 }
+
+class PaisListener(val listener: (pais: Pais)-> Unit){
+    fun onClick(pais: Pais) = listener(pais)
+}
+

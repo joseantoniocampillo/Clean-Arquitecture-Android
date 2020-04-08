@@ -1,7 +1,9 @@
 package es.jacampillo.avancedelcovid.models_api_response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import kotlinx.android.parcel.Parcelize
 
 /*
 * Clase generada con el plugin de Android Studio
@@ -11,6 +13,7 @@ import androidx.annotation.Keep
 * Obviamente le da el nombre que encuentra en este caso en inglés CountryInfo
 */
 
+@Parcelize
 @Keep
 data class Pais(
     @SerializedName("active")
@@ -43,7 +46,7 @@ data class Pais(
     var testsPerOneMillion: Int?
 
 
-)
+) : Parcelable
 
 //tests: 2011529,
 //testsPerOneMillion: 6077
