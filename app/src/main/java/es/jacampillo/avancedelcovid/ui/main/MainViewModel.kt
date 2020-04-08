@@ -18,6 +18,7 @@ import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.POSITIVOS
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.RECUPERADOS
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST_POR_MILLON
+import java.text.NumberFormat
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -97,6 +98,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
+    }
+
+    fun Integer.formatoCastellano(int : Int): String{
+        return NumberFormat.getIntegerInstance().format(int)
     }
 
 }

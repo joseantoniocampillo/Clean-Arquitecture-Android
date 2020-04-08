@@ -74,7 +74,7 @@ fun Long.toDateFormat(): String {
 fun orden(codigo: Int?): String {
     return when (codigo) {
         MainFragment.FALLECIDOS -> "👓 Fallecidos"
-        MainFragment.POSITIVOS -> "\uD83D\uDC53 Positivos"
+        MainFragment.POSITIVOS -> "\uD83D\uDC53 Casos"
         MainFragment.FALLECIDOS_HOY -> "🎚 Hoy"
         MainFragment.RECUPERADOS -> "\uD83D\uDC53 ♥ Recuperados"
         MainFragment.GRAVES -> "💊 Graves"

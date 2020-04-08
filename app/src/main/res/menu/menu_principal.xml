@@ -2,16 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/ordenar_por_positivos"
+    <item android:title="@string/ordenar_por_casos"
         android:id="@+id/item_actualizar"/>
+
     <item android:title="@string/ordenar_por_fallecidos"
         android:id="@+id/item_ord_fallecidos"/>
+
+    <item android:title="@string/ordenar_por_recuperados"
+        android:id="@+id/item_ord_recuperados"/>
 
     <item android:title="@string/ordenar_por_fallecidos_hoy"
         android:id="@+id/item_ord_fallecidos_hoy"/>
 
-    <item android:title="@string/ordenar_por_recuperados"
-        android:id="@+id/item_ord_recuperados"/>
 
     <item android:title="@string/ordenar_por_graves"
         android:id="@+id/item_ord_graves"/>

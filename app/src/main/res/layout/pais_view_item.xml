@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="java.text.NumberFormat"/>
+
         <variable
             name="mfc"
             type="es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion" />
@@ -58,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv1"
-                android:text='@{String.format("%d Positivos", pais.cases)}' />
+                android:text='@{String.format("%s Casos", NumberFormat.getIntegerInstance().format(pais.cases))}' />
 <!--                android:text='@{String.valueOf(viewmodel.selection.intValue())}' />-->
 
             <TextView
@@ -68,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
-                android:text='@{String.format("%d Recuperados", pais.recovered)}' />
+                android:text='@{String.format("%s Recuperados", NumberFormat.getIntegerInstance().format(pais.recovered))}' />
 <!--                android:text='@{String.valueOf(mfc.RECUPERADOS)}' />-->
 
             <TextView
@@ -78,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv3"
-                android:text='@{String.format("%d Fallecidos", pais.deaths)}' />
+                android:text='@{String.format("%s Fallecidos", NumberFormat.getIntegerInstance().format(pais.deaths))}' />
 
             <TextView
                 android:id="@+id/tv5"
@@ -87,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
-                android:text='@{String.format("%d En estado grave", pais.critical)}' />
+                android:text='@{String.format("%s En estado grave", NumberFormat.getIntegerInstance().format(pais.critical))}' />
 
             <TextView
                 android:id="@+id/tv6"
@@ -96,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv5"
-                android:text='@{String.format("%d Fallecidos hoy", pais.todayDeaths)}' />
+                android:text='@{String.format("%s Fallecidos hoy", NumberFormat.getIntegerInstance().format(pais.todayDeaths))}' />
 
             <TextView
                 android:id="@+id/tv7"
@@ -105,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv6"
-                android:text='@{String.format("%d Test", pais.tests)}' />
+                android:text='@{String.format("%s Test", NumberFormat.getIntegerInstance().format(pais.tests))}' />
 
             <TextView
                 android:id="@+id/tv8"
@@ -114,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv7"
-                android:text='@{String.format("%d Test por millón", pais.testsPerOneMillion)}' />
+                android:text='@{String.format("%s Test por millón", NumberFormat.getIntegerInstance().format(pais.testsPerOneMillion))}' />
 
 
 

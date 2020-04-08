@@ -9,5 +9,5 @@
     <string name="ordenar_por_graves">… Graves</string>
     <string name="ordenar_por_test">… Test</string>
     <string name="ordenar_por_test_por_millon">… Test por Millón</string>
-    <string name="ordenar_por_positivos">Ordenar por Positivos</string>
+    <string name="ordenar_por_casos">Ordenar por Casos</string>
 </resources>
