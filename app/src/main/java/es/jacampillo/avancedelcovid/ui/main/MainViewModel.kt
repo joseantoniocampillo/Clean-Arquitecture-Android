@@ -26,7 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val paisesRepositorio = Repositorio(getDatabase(application))
 
     private val _selection = MutableLiveData<Int>()
-    private val selection: LiveData<Int> get() = _selection
+    val selection: LiveData<Int> get() = _selection
 
     private fun obtenerLista(codigo: Int): LiveData<List<Pais>> =
         paisesRepositorio.listaSelecionada(codigo)
@@ -34,6 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val paisesOrdenados = Transformations.switchMap(selection) {
         // Esta función nos devuelve el liveData que representa paisesOrdenados
         // que a su vez actualiza la vista del recyclerview
+        Log.d("ttt", selection.value.toString())
         obtenerLista(it)
     }
 

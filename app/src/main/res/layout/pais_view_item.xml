@@ -6,9 +6,15 @@
     <data>
 
         <variable
+            name="mfc"
+            type="es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion" />
+        <variable
             name="pais"
             type="es.jacampillo.avancedelcovid.models_api_response.Pais" />
 
+        <variable
+            name="viewmodel"
+            type="es.jacampillo.avancedelcovid.ui.main.MainViewModel" />
     </data>
 
 
@@ -48,33 +54,36 @@
             <TextView
                 android:id="@+id/tv2"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.POSITIVOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv1"
-
                 android:text='@{String.format("%d Positivos", pais.cases)}' />
+<!--                android:text='@{String.valueOf(viewmodel.selection.intValue())}' />-->
 
             <TextView
                 android:id="@+id/tv3"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.RECUPERADOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
-
                 android:text='@{String.format("%d Recuperados", pais.recovered)}' />
+<!--                android:text='@{String.valueOf(mfc.RECUPERADOS)}' />-->
 
             <TextView
                 android:id="@+id/tv4"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.FALLECIDOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv3"
-
                 android:text='@{String.format("%d Fallecidos", pais.deaths)}' />
 
             <TextView
                 android:id="@+id/tv5"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.GRAVES}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
@@ -83,6 +92,7 @@
             <TextView
                 android:id="@+id/tv6"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.FALLECIDOS_HOY}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv5"
@@ -91,6 +101,7 @@
             <TextView
                 android:id="@+id/tv7"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.TEST}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv6"
@@ -99,6 +110,7 @@
             <TextView
                 android:id="@+id/tv8"
                 style="@style/TextviewStyle"
+                app:enNegrita="@{viewmodel.selection.intValue() == mfc.TEST_POR_MILLON}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv7"

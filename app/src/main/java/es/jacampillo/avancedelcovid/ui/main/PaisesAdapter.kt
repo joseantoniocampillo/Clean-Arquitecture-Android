@@ -35,6 +35,12 @@ class PaisesAdapter (val paisListener: PaisListener): ListAdapter<Pais, PaisesAd
     class PaisViewHolder(private val binding: PaisViewItemBinding) : RecyclerView.ViewHolder (binding.root){
         fun bind(pais: Pais){
             binding.pais = pais
+
+            // Se hace necesario para poder recuperar valores desde los items para actualizar las vistas
+            // segun el orden marcado parametro éste que solo se puede obtener del viewmodel
+            binding.mfc = MainFragment.Companion
+            binding.viewmodel = MainFragment.Companion.modelo
+
             binding.executePendingBindings()
         }
     }

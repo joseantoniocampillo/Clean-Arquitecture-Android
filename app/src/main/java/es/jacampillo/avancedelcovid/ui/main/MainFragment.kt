@@ -19,6 +19,10 @@ class MainFragment : Fragment() {
         val GRAVES =R.id.item_ord_graves
         val TEST =R.id.item_ord_test
         val TEST_POR_MILLON =R.id.item_ord_test_por_millon
+
+        // pequeño truco para recuperar del viewmodel hacia el adapter de la lista
+        // el valor del orden de la lista necesario para formatear texto
+        lateinit var modelo: MainViewModel
     }
 
     init {
@@ -54,6 +58,9 @@ class MainFragment : Fragment() {
         viewmodel.titulo.observe(viewLifecycleOwner, Observer {activity?.title = it})
 
         setHasOptionsMenu(true)
+        // chapuza o buena solución, fue lo que se me ocurrió para poder actualizar
+        // las listas desde una instancia del view model
+        modelo = viewmodel
         return binding.root
     }
 

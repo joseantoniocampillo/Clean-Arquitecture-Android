@@ -1,12 +1,12 @@
 package es.jacampillo.avancedelcovid
 
+import android.graphics.Typeface
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.ui.main.MainFragment
 import es.jacampillo.avancedelcovid.ui.main.PaisesAdapter
@@ -36,20 +36,39 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Pais>?) {
 }
 
 @BindingAdapter("positivos")
-fun bindPositivos(tv : TextView, pais: Pais?){
+fun bindPositivos(tv: TextView, pais: Pais?) {
     pais?.apply {
         tv.text = String.format("Positivos al test: %d", pais.cases)
     }
 
 }
 
- /*------------------------------ UTILS ......................................*/
+@BindingAdapter("enNegrita")
+fun enNegrita(tv: TextView, esEste: Boolean?) {
+    //tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+    esEste?.let {
+        if (esEste) {
+            tv.apply {
+                textSize = 16f
+                setTextColor(resources.getColor(R.color.texto_resaltado))
+            }
+        } else {
+            tv.apply {
+                textSize = 12f
+                setTextColor(resources.getColor(R.color.texto_pricipal))
+            }
+        }
+    }
+}
 
-    //SimpleDateFormat("yyyy.MM.dd HH:mm")
-fun Long.toDateFormat(): String{
+
+/*------------------------------ UTILS ......................................*/
+
+//SimpleDateFormat("yyyy.MM.dd HH:mm")
+fun Long.toDateFormat(): String {
     val date = Date(this)
     val format = SimpleDateFormat("HH:mm dd.MM.yy ")
-        return format.format(date)
+    return format.format(date)
 }
 
 fun orden(codigo: Int?): String {
