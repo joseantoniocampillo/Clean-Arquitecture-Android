@@ -14,14 +14,15 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+        tools:context=".ui.main.MainFragment"
+        android:background="@color/primaryLightColor">
 
         <androidx.recyclerview.widget.RecyclerView
             app:listDatos="@{viewmodelo.paisesOrdenados}"
             android:id="@+id/paises_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="6dp"
+            android:padding="2dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
