@@ -20,9 +20,8 @@ class MainFragment : Fragment() {
         val TEST =R.id.item_ord_test
         val TEST_POR_MILLON =R.id.item_ord_test_por_millon
 
-        // pequeño truco para recuperar del viewmodel hacia el adapter de la lista
-        // el valor del orden de la lista necesario para formatear texto
-        lateinit var modelo: MainViewModel
+        // para item en recyclerview
+        var selected = 0
     }
 
     init {
@@ -58,9 +57,6 @@ class MainFragment : Fragment() {
         viewmodel.titulo.observe(viewLifecycleOwner, Observer {activity?.title = it})
 
         setHasOptionsMenu(true)
-        // chapuza o buena solución, fue lo que se me ocurrió para poder actualizar
-        // las listas desde una instancia del view model
-        modelo = viewmodel
         return binding.root
     }
 
@@ -70,8 +66,10 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            viewmodel.updateSelection(item.itemId)
+            // valor recuperado en la vista de items para renderizar cambios
+            selected = item.itemId
 
+            viewmodel.updateSelection(item.itemId)
         return true
     }
 }

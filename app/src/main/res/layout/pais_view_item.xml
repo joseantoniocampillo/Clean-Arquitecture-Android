@@ -14,9 +14,6 @@
             name="pais"
             type="es.jacampillo.avancedelcovid.models_api_response.Pais" />
 
-        <variable
-            name="viewmodel"
-            type="es.jacampillo.avancedelcovid.ui.main.MainViewModel" />
     </data>
 
 
@@ -56,27 +53,25 @@
             <TextView
                 android:id="@+id/tv2"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.POSITIVOS}"
+                app:enNegrita="@{mfc.selected == mfc.POSITIVOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv1"
                 android:text='@{String.format("%s Casos", NumberFormat.getIntegerInstance().format(pais.cases))}' />
-<!--                android:text='@{String.valueOf(viewmodel.selection.intValue())}' />-->
 
             <TextView
                 android:id="@+id/tv3"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.RECUPERADOS}"
+                app:enNegrita="@{mfc.selected == mfc.RECUPERADOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
                 android:text='@{String.format("%s Recuperados", NumberFormat.getIntegerInstance().format(pais.recovered))}' />
-<!--                android:text='@{String.valueOf(mfc.RECUPERADOS)}' />-->
 
             <TextView
                 android:id="@+id/tv4"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.FALLECIDOS}"
+                app:enNegrita="@{mfc.selected == mfc.FALLECIDOS}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv3"
@@ -85,7 +80,7 @@
             <TextView
                 android:id="@+id/tv5"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.GRAVES}"
+                app:enNegrita="@{mfc.selected == mfc.GRAVES}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
@@ -94,7 +89,7 @@
             <TextView
                 android:id="@+id/tv6"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.FALLECIDOS_HOY}"
+                app:enNegrita="@{mfc.selected == mfc.FALLECIDOS_HOY}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv5"
@@ -103,7 +98,7 @@
             <TextView
                 android:id="@+id/tv7"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.TEST}"
+                app:enNegrita="@{mfc.selected == mfc.TEST}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv6"
@@ -112,12 +107,11 @@
             <TextView
                 android:id="@+id/tv8"
                 style="@style/TextviewStyle"
-                app:enNegrita="@{viewmodel.selection.intValue() == mfc.TEST_POR_MILLON}"
+                app:enNegrita="@{mfc.selected == mfc.TEST_POR_MILLON}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv7"
                 android:text='@{String.format("%s Test por millón", NumberFormat.getIntegerInstance().format(pais.testsPerOneMillion))}' />
-
 
 
         </RelativeLayout>
