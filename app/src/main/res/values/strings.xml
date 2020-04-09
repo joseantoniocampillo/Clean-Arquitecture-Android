@@ -10,4 +10,5 @@
     <string name="ordenar_por_test">… Test</string>
     <string name="ordenar_por_test_por_millon">… Test por Millón</string>
     <string name="ordenar_por_casos">Ordenar por Casos</string>
+    <string name="actualizar_fecha">Actualizar</string>
 </resources>

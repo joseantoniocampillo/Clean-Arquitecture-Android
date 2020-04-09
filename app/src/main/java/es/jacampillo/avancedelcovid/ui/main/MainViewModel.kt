@@ -1,8 +1,13 @@
 package es.jacampillo.avancedelcovid.ui.main
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
+import com.google.android.material.snackbar.Snackbar
 import es.jacampillo.avancedelcovid.database.getDatabase
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.repo.Repositorio
@@ -60,13 +65,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _selection.value = POSITIVOS
     }
 
+    fun updateVersion(){
+        refreshFromRepository()
+    }
+
     private fun refreshFromRepository() {
         coroutineScope.launch {
-            try {
-                paisesRepositorio.refreshPaises()
-            } catch (e: HttpException) {
-                Log.d("error_ttt", e.message())
-            }
+            paisesRepositorio.refreshPaises() // sacamos del try catch en commit "verifica interntet"
         }
     }
 
@@ -100,8 +105,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun Integer.formatoCastellano(int : Int): String{
-        return NumberFormat.getIntegerInstance().format(int)
-    }
+//    fun Int.formatoCastellano(int : Int): String{
+//        return NumberFormat.getIntegerInstance().format(int)
+//    }
 
 }

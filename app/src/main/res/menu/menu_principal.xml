@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="@string/ordenar_por_casos"
-        android:id="@+id/item_actualizar"/>
+    <item
+        android:id="@+id/item_actualizar_fecha"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:title="@string/actualizar_fecha"
+        app:showAsAction="ifRoom">
+    </item>
 
-    <item android:title="@string/ordenar_por_fallecidos"
-        android:id="@+id/item_ord_fallecidos"/>
+    <item
+        android:id="@+id/item_actualizar"
+        android:title="@string/ordenar_por_casos" />
 
-    <item android:title="@string/ordenar_por_recuperados"
-        android:id="@+id/item_ord_recuperados"/>
+    <item
+        android:id="@+id/item_ord_fallecidos"
+        android:title="@string/ordenar_por_fallecidos" />
 
-    <item android:title="@string/ordenar_por_fallecidos_hoy"
-        android:id="@+id/item_ord_fallecidos_hoy"/>
+    <item
+        android:id="@+id/item_ord_recuperados"
+        android:title="@string/ordenar_por_recuperados" />
+
+    <item
+        android:id="@+id/item_ord_fallecidos_hoy"
+        android:title="@string/ordenar_por_fallecidos_hoy" />
 
 
-    <item android:title="@string/ordenar_por_graves"
-        android:id="@+id/item_ord_graves"/>
+    <item
+        android:id="@+id/item_ord_graves"
+        android:title="@string/ordenar_por_graves" />
 
-    <item android:title="@string/ordenar_por_test"
-        android:id="@+id/item_ord_test"/>
+    <item
+        android:id="@+id/item_ord_test"
+        android:title="@string/ordenar_por_test" />
 
-    <item android:title="@string/ordenar_por_test_por_millon"
-        android:id="@+id/item_ord_test_por_millon"/>
+    <item
+        android:id="@+id/item_ord_test_por_millon"
+        android:title="@string/ordenar_por_test_por_millon" />
 
 
 </menu>
