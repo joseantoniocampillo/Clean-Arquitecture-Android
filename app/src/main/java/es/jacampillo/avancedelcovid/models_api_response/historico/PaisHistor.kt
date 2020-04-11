@@ -1,15 +1,12 @@
 package es.jacampillo.avancedelcovid.models_api_response.historico
 
 
+import android.util.Log
 import androidx.annotation.Keep
-import com.google.gson.JsonObject
+import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Types
 import org.json.JSONObject
-import java.lang.reflect.Type
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 @Keep
@@ -37,17 +34,26 @@ data class PaisHistor(
         class Cases(
         )
 
-        @Keep
-        @JsonClass(generateAdapter = true)
-        class Deaths(
-            @Json(name = "3/16/20")
-            val x31620: Int
-            //val list: List<JsonObject>
-        )
+        @JsonClass(generateAdapter = false)
+        class Deaths(val lista: Map<String, Int>)
+
+//        @Keep
+//        class Deaths(
+//            val fechas: Fechas
+//            //val list: List<JsonObject>
+//        )
 
         @Keep
         @JsonClass(generateAdapter = true)
         class Recovered(
         )
+    }
+}
+
+class FechasAdapter {
+    @FromJson
+    fun fromJson(json: Map<String, Int>): PaisHistor.Timeline.Deaths {
+        //Log.d("xxx", "got $json")
+        return PaisHistor.Timeline.Deaths(json)
     }
 }

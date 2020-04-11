@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import es.jacampillo.avancedelcovid.models_api_response.Pais
+import es.jacampillo.avancedelcovid.models_api_response.historico.FechasAdapter
 import es.jacampillo.avancedelcovid.models_api_response.historico.PaisHistor
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
@@ -16,8 +17,8 @@ private const val BASE_URL = "https://corona.lmao.ninja"
 
 
 private val moshi = Moshi.Builder()
+    .add(FechasAdapter())
     .add(KotlinJsonAdapterFactory())
-    //.add(MoshiAdapters())
     .build()
 
 private val retrofit = Retrofit.Builder()
