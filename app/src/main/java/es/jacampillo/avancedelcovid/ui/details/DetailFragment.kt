@@ -29,11 +29,12 @@ class DetailFragment : Fragment() {
 
         val application = requireNotNull(activity).application
         val pais = DetailFragmentArgs.fromBundle(requireArguments()).pais
+        activity?.title = pais.country
 
         val factory = DetailViewModel.Factory(pais, application)
         val viewmodel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
-
         binding.vm = viewmodel
+
         return binding.root
     }
 

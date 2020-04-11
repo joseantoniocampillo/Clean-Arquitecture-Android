@@ -4,36 +4,78 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="java.text.NumberFormat"/>
+        <!--
+
+        <variable
+            name="mfc"
+            type="es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion" />-->
         <variable
             name="vm"
             type="es.jacampillo.avancedelcovid.ui.details.DetailViewModel" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.details.DetailFragment">
 
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{vm.paisSelected.country}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="12dp"
+                android:contentDescription="@string/bandera_del_pais"
+                app:imgUrl="@{vm.paisSelected.countryInfo.flag}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text='@{String.format("%s Casos", NumberFormat.getIntegerInstance().format(vm.paisSelected.cases))}' />
+
+            <TextView
+                android:id="@+id/tv3"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv2"
+                android:text='@{String.format("%s Recuperados", NumberFormat.getIntegerInstance().format(vm.paisSelected.recovered))}' />
+
+            <TextView
+                android:id="@+id/tv4"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv3"
+                android:text='@{String.format("%s Fallecidos", NumberFormat.getIntegerInstance().format(vm.paisSelected.deaths))}' />
+            <TextView
+                android:id="@+id/tv6"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv4"
+                android:text='@{String.format("%s Fallecidos hoy", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayDeaths))}' />
+
+
+        </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart
-            app:contenido="@{vm.contenido}"
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:contenido="@{vm.contenido}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
