@@ -24,29 +24,40 @@ class DetailViewModel (val pais: Pais, app: Application): ViewModel() {
     private val _paisSelected = MutableLiveData<Pais>()
     val paisSelected : LiveData<Pais> get() = _paisSelected
 
-    private val _contenido = MutableLiveData<ArrayList<DatosGraph>>()
-    val contenido : LiveData<ArrayList<DatosGraph>> get() = _contenido
+    private val _fallecidos = MutableLiveData<ArrayList<DatosGraph>>()
+    val fallecidos : LiveData<ArrayList<DatosGraph>> get() = _fallecidos
+
+    private val _recuperados = MutableLiveData<ArrayList<DatosGraph>>()
+    val recuperados : LiveData<ArrayList<DatosGraph>> get() = _recuperados
+
+    private val _casos = MutableLiveData<ArrayList<DatosGraph>>()
+    val casos : LiveData<ArrayList<DatosGraph>> get() = _casos
+
+
 
     private fun consigeHistoric(){
         coroutineScope.launch {
             try {
             val historico = paisesRepositorio.getHistorical(pais.country.toLowerCase(Locale.ROOT)).await()
-                val graficas = datosGraphDeHistorico(historico)
-                _contenido.value = graficas
+                _fallecidos.value = datosGraphDeHistorico(historico, Grafica.FALLECIDOS)
+                _casos.value = datosGraphDeHistorico(historico, Grafica.CASOS)
+                _recuperados.value = datosGraphDeHistorico(historico, Grafica.RECUPERADOS)
             }catch (e: Exception){
                 Log.d("aaa:a", "error: ${e.localizedMessage}" )
             }
         }
     }
 
-    fun datosGraphDeHistorico(histor: PaisHistor): ArrayList<DatosGraph> {
-        histor.timeline.deaths.lista.forEach{
-            Log.d("aaa:a", "${it.key}: ${it.value}" )
-        }
+    fun datosGraphDeHistorico(histor: PaisHistor, grafica: Grafica): ArrayList<DatosGraph> {
         val timeline = histor.timeline
         var control = 1f
         val datosGraph: ArrayList<DatosGraph> = ArrayList()
-        for (item in timeline.deaths.lista){
+        val lista  = when(grafica) {
+            Grafica.FALLECIDOS -> timeline.deaths.lista
+            Grafica.CASOS -> timeline.cases.lista
+            Grafica.RECUPERADOS -> timeline.recovered.lista
+        }
+        for (item in lista){
 //            datosGraph.add(DatosGraph(item.key, item.key.split("/")[1].toFloat(), item.value.toFloat()))
             datosGraph.add(DatosGraph(item.key, control, item.value.toFloat()))
             control++
@@ -90,3 +101,5 @@ class DetailViewModel (val pais: Pais, app: Application): ViewModel() {
 //        }
 //    }
 }
+
+enum class Grafica {FALLECIDOS, CASOS, RECUPERADOS}

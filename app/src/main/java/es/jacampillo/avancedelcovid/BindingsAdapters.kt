@@ -6,11 +6,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import es.jacampillo.avancedelcovid.models_api_response.DatosGraph
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.ui.main.MainFragment
@@ -68,37 +66,59 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
     }
 }
 
-@BindingAdapter("contenido")
-fun contenidoChart(chart: LineChart, dataObjects: ArrayList<DatosGraph>?){
+@BindingAdapter("etiqueta","contenido")
+fun contenidoChart(chart: LineChart, etiqueta: String? = "", contenido: ArrayList<DatosGraph>? = null){
     val entries = ArrayList<Entry>()
-    dataObjects?.let{
-        for (dato in dataObjects){
+    contenido?.let{
+        for (dato in contenido){
             entries.add(Entry(dato.ejeX, dato.ejeY))
         }
-        val dataSet = LineDataSet(entries, "Total Fallecidos")
+        val dataSet = LineDataSet(entries, etiqueta)
         dataSet.color = R.color.negro
         dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
         val lineData = LineData(dataSet)
         chart.data = lineData
-        chart.description.text = ""
+        chart.description.setEnabled(false);
         chart.invalidate() // refresh
     }
 }
 
-@BindingAdapter("contenidoBarras")
-fun contenidoChartBarras(chart: LineChart, dataObjects: ArrayList<DatosGraph>?){
-    val entries = ArrayList<Entry>()
+@BindingAdapter("contenidoBarChart")
+fun contenidoChartBarras(chart: BarChart, dataObjects: ArrayList<DatosGraph>?){
+    val entries = ArrayList<BarEntry>()
     dataObjects?.let{
         for (dato in dataObjects){
-            entries.add(Entry(dato.ejeX, dato.ejeY))
+            entries.add(BarEntry(dato.ejeX, dato.ejeY))
         }
-        val dataSet = LineDataSet(entries, "Total Fallecidos")
-        dataSet.color = R.color.negro
-        dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
-        val lineData = LineData(dataSet)
-        chart.data = lineData
-        chart.description.text = ""
-        chart.invalidate() // refresh
+//        chart.setDrawBarShadow(false);
+//        chart.setDrawValueAboveBar(true);
+//        chart.getDescription().setEnabled(false);
+//
+//        // scaling can now only be done on x- and y-axis separately
+//        chart.setPinchZoom(false);
+//
+//        chart.setDrawGridBackground(false);
+//        val l = chart.legend
+//        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+//        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+//        l.orientation = Legend.LegendOrientation.HORIZONTAL
+//        l.setDrawInside(false)
+//        l.form = LegendForm.SQUARE
+//        l.formSize = 9f
+//        l.textSize = 11f
+//        l.xEntrySpace = 4f
+
+
+        var set1 = BarDataSet(entries, "Fallecidos cada día")
+
+        //-------
+        val data = BarData(set1)
+        data.setValueTextSize(10f)
+        //data.setValueTypeface(tfLight)
+        data.barWidth = 0.9f
+
+
+        chart.data = data
     }
 }
 

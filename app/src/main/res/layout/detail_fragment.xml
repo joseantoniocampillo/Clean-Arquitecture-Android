@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-        <import type="java.text.NumberFormat"/>
+        <import type="java.text.NumberFormat" />
 
-        <variable
-            name="mfc"
-            type="es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion" />-->
         <variable
             name="vm"
             type="es.jacampillo.avancedelcovid.ui.details.DetailViewModel" />
 
     </data>
 
-    <LinearLayout
-        android:id="@+id/detail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.details.DetailFragment">
+        android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            tools:context=".ui.details.DetailFragment">
 
             <ImageView
                 android:layout_width="80dp"
@@ -59,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv3"
                 android:text='@{String.format("%s Fallecidos", NumberFormat.getIntegerInstance().format(vm.paisSelected.deaths))}' />
+
             <TextView
                 android:id="@+id/tv5"
                 style="@style/TextviewStyle"
@@ -72,18 +69,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_below="@+id/tv5"
-                app:contenido="@{vm.contenido}" />
+                app:contenido="@{vm.casos}"
+                app:etiqueta="@{@string/char_casos}"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/chart"
+                app:contenido="@{vm.fallecidos}"
+                app:etiqueta="@{@string/char_fallecidos}"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart3"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/chart2"
+                app:contenido="@{vm.recuperados}"
+                app:etiqueta="@{@string/char_recuperados}"/>
+
+
 
 <!--            <com.github.mikephil.charting.charts.BarChart-->
-<!--                android:id="@+id/barchart"-->
+<!--                android:id="@+id/chart2"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="300dp"-->
 <!--                android:layout_below="@+id/chart"-->
-<!--                app:contenidoBarras="@{}" />          -->
+<!--                app:contenidoBarChart="@{vm.casos}" />-->
+
+            <!--            <com.github.mikephil.charting.charts.LineChart-->
+            <!--                android:id="@+id/chart3"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:layout_below="@+id/chart2"-->
+            <!--                app:contenidoBarChart2="@{vm.contenido}" />-->
+
+
+            <!--            <com.github.mikephil.charting.charts.BarChart-->
+            <!--                android:id="@+id/barchart"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:layout_below="@+id/chart"-->
+            <!--                app:contenidoBarras="@{}" />          -->
 
         </RelativeLayout>
+    </ScrollView>
 
-
-
-    </LinearLayout>
 </layout>

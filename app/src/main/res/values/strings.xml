@@ -11,4 +11,7 @@
     <string name="ordenar_por_test_por_millon">… Test por Millón</string>
     <string name="ordenar_por_casos">Ordenar por Casos</string>
     <string name="actualizar_fecha">Actualizar</string>
+    <string name="char_fallecidos">Fallecidos</string>
+    <string name="char_casos">Casos</string>
+    <string name="char_recuperados">Recuperados</string>
 </resources>
