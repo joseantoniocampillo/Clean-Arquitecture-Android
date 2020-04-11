@@ -25,17 +25,16 @@ class Repositorio(private val database: PaisesDatabase) {
                     PaisesApi.retrofitService.getDataGraficos(paisId).await()
                 val paisString = deferedPaisHistorical.country
                 Log.d("xxx_1", paisString)
-                val valor = deferedPaisHistorical.timeline.cases
-                Log.d("xxx_2", valor.toString())
+                val valor = deferedPaisHistorical.timeline.cases.lista
+                Log.d("xxx_2", "casos "+ valor.toString())
 
 //                val deaths = deferedPaisHistorical.timeline.deaths
                 val deaths = deferedPaisHistorical.timeline.deaths
 
                 var f = deaths.lista
                 f.forEach {
-                    Log.d("xxx_3", it.key + it.value.toString())
+                    Log.d("xxx_3", "deaths "    + it.key + it.value.toString())
                 }
-
 
             } catch (e: HttpException) {
 

@@ -23,7 +23,7 @@ data class PaisHistor(
     @JsonClass(generateAdapter = true)
     data class Timeline(
         @Json(name = "cases")
-        val cases: Casos,
+        val cases: Cases,
         @Json(name = "deaths")
         val deaths: Deaths,
         @Json(name = "recovered")
@@ -31,29 +31,34 @@ data class PaisHistor(
     ) {
         @Keep
         @JsonClass(generateAdapter = true)
-        class Cases(
-        )
+        class Cases(val lista: Map<String, Int>)
 
-        @JsonClass(generateAdapter = false)
+        @JsonClass(generateAdapter = true)
         class Deaths(val lista: Map<String, Int>)
 
-//        @Keep
-//        class Deaths(
-//            val fechas: Fechas
-//            //val list: List<JsonObject>
-//        )
-
-        @Keep
         @JsonClass(generateAdapter = true)
-        class Recovered(
-        )
+        class Recovered(val lista: Map<String, Int>)
+
+        class CasesAdapter {
+            @FromJson
+            fun fromJson(json: Map<String, Int>): Cases {
+                return Cases(json)
+            }
+        }
+        class DeathsAdapter {
+            @FromJson
+            fun fromJson(json: Map<String, Int>): Deaths {
+                return Deaths(json)
+            }
+        }
+        class RecoveredAdapter {
+            @FromJson
+            fun fromJson(json: Map<String, Int>): Recovered {
+                return Recovered(json)
+            }
+        }
+
     }
+
 }
 
-class FechasAdapter {
-    @FromJson
-    fun fromJson(json: Map<String, Int>): PaisHistor.Timeline.Deaths {
-        //Log.d("xxx", "got $json")
-        return PaisHistor.Timeline.Deaths(json)
-    }
-}

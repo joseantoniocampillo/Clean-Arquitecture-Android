@@ -4,7 +4,6 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import es.jacampillo.avancedelcovid.models_api_response.Pais
-import es.jacampillo.avancedelcovid.models_api_response.historico.FechasAdapter
 import es.jacampillo.avancedelcovid.models_api_response.historico.PaisHistor
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
@@ -14,17 +13,15 @@ import retrofit2.http.Path
 
 private const val BASE_URL = "https://corona.lmao.ninja"
 
-
-
 private val moshi = Moshi.Builder()
-    .add(FechasAdapter())
+    .add(PaisHistor.Timeline.CasesAdapter())
+    .add(PaisHistor.Timeline.DeathsAdapter())
+    .add(PaisHistor.Timeline.RecoveredAdapter())
     .add(KotlinJsonAdapterFactory())
     .build()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-//   No fue necesario para el moshi con el kotlinadapterfactory ..
-//    .addConverterFactory(MoshiConverterFactory.create())
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
@@ -36,8 +33,6 @@ interface PaisApiService {
 
     @GET("v2/historical/{pais}")
     fun getDataGraficos(@Path("pais") paisId: String): Deferred<PaisHistor>
-
-
 }
 
 object PaisesApi {
