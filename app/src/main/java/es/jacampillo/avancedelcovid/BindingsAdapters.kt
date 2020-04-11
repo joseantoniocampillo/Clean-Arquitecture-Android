@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.*
 import es.jacampillo.avancedelcovid.models_api_response.DatosGraph
 import es.jacampillo.avancedelcovid.models_api_response.Pais
+import es.jacampillo.avancedelcovid.models_api_response.historico.PaisHistor
 import es.jacampillo.avancedelcovid.ui.main.MainFragment
 import es.jacampillo.avancedelcovid.ui.main.PaisesAdapter
 import java.text.SimpleDateFormat
@@ -66,22 +67,52 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
     }
 }
 
+//@BindingAdapter("etiqueta","contenido")
+//fun contenidoChart(chart: LineChart, etiqueta: String? = "", contenido: ArrayList<DatosGraph>? = null){
+//    val entries = ArrayList<Entry>()
+//    contenido?.let{
+//        for (dato in contenido){
+//            entries.add(Entry(dato.ejeX, dato.ejeY))
+//        }
+//        val dataSet = LineDataSet(entries, etiqueta)
+//        dataSet.color = R.color.negro
+//        dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
+//        val lineData = LineData(dataSet)
+//        chart.data = lineData
+//        chart.description.setEnabled(false);
+//        chart.invalidate() // refresh
+//    }
+//}
+
 @BindingAdapter("etiqueta","contenido")
-fun contenidoChart(chart: LineChart, etiqueta: String? = "", contenido: ArrayList<DatosGraph>? = null){
+fun contenidoChart(chart: LineChart, etiqueta: String? = "", historical: PaisHistor? = null){
     val entries = ArrayList<Entry>()
-    contenido?.let{
+    historical?.let{
+
         for (dato in contenido){
             entries.add(Entry(dato.ejeX, dato.ejeY))
         }
         val dataSet = LineDataSet(entries, etiqueta)
         dataSet.color = R.color.negro
         dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
+
+        val dataSet2 = LineDataSet(entries, etiqueta)
+        dataSet2.color = R.color.negro
+        dataSet2.setValueTextColor(R.color.secondaryColor); // styling, ..
+
+        val dataSet3 = LineDataSet(entries, etiqueta)
+        dataSet3.color = R.color.negro
+        dataSet3.setValueTextColor(R.color.secondaryColor); // styling, ..
+
+
         val lineData = LineData(dataSet)
         chart.data = lineData
         chart.description.setEnabled(false);
         chart.invalidate() // refresh
     }
 }
+
+
 
 @BindingAdapter("contenidoBarChart")
 fun contenidoChartBarras(chart: BarChart, dataObjects: ArrayList<DatosGraph>?){

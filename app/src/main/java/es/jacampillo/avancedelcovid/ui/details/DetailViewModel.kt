@@ -33,7 +33,8 @@ class DetailViewModel (val pais: Pais, app: Application): ViewModel() {
     private val _casos = MutableLiveData<ArrayList<DatosGraph>>()
     val casos : LiveData<ArrayList<DatosGraph>> get() = _casos
 
-
+    private val _historical = MutableLiveData<PaisHistor>()
+    val historical : LiveData<PaisHistor> get() = _historical
 
     private fun consigeHistoric(){
         coroutineScope.launch {
@@ -42,6 +43,7 @@ class DetailViewModel (val pais: Pais, app: Application): ViewModel() {
                 _fallecidos.value = datosGraphDeHistorico(historico, Grafica.FALLECIDOS)
                 _casos.value = datosGraphDeHistorico(historico, Grafica.CASOS)
                 _recuperados.value = datosGraphDeHistorico(historico, Grafica.RECUPERADOS)
+                _historical.value = historico
             }catch (e: Exception){
                 Log.d("aaa:a", "error: ${e.localizedMessage}" )
             }
