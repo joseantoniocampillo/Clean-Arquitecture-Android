@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -68,18 +69,37 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
 }
 
 @BindingAdapter("contenido")
-fun contenidoChart(chart: LineChart, dataObjects: Array<DatosGraph>){
+fun contenidoChart(chart: LineChart, dataObjects: ArrayList<DatosGraph>?){
     val entries = ArrayList<Entry>()
-    for (dato in dataObjects){
-        entries.add(Entry(dato.ejeX, dato.ejeY))
+    dataObjects?.let{
+        for (dato in dataObjects){
+            entries.add(Entry(dato.ejeX, dato.ejeY))
+        }
+        val dataSet = LineDataSet(entries, "Total Fallecidos")
+        dataSet.color = R.color.negro
+        dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
+        val lineData = LineData(dataSet)
+        chart.data = lineData
+        chart.description.text = ""
+        chart.invalidate() // refresh
     }
-    val dataSet = LineDataSet(entries, "Esta es el label")
-    dataSet.color = R.color.texto_pricipal
-    dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
-    val lineData = LineData(dataSet)
-    chart.data = lineData
-    chart.invalidate() // refresh
+}
 
+@BindingAdapter("contenidoBarras")
+fun contenidoChartBarras(chart: LineChart, dataObjects: ArrayList<DatosGraph>?){
+    val entries = ArrayList<Entry>()
+    dataObjects?.let{
+        for (dato in dataObjects){
+            entries.add(Entry(dato.ejeX, dato.ejeY))
+        }
+        val dataSet = LineDataSet(entries, "Total Fallecidos")
+        dataSet.color = R.color.negro
+        dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
+        val lineData = LineData(dataSet)
+        chart.data = lineData
+        chart.description.text = ""
+        chart.invalidate() // refresh
+    }
 }
 
 

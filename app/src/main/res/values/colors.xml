@@ -15,4 +15,5 @@
     <color name="secondaryDarkColor">#140078</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="negro">#000000</color>
 </resources>

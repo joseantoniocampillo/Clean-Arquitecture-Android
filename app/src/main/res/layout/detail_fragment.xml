@@ -6,7 +6,6 @@
     <data>
 
         <import type="java.text.NumberFormat"/>
-        <!--
 
         <variable
             name="mfc"
@@ -61,21 +60,30 @@
                 android:layout_below="@+id/tv3"
                 android:text='@{String.format("%s Fallecidos", NumberFormat.getIntegerInstance().format(vm.paisSelected.deaths))}' />
             <TextView
-                android:id="@+id/tv6"
+                android:id="@+id/tv5"
                 style="@style/TextviewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
                 android:text='@{String.format("%s Fallecidos hoy", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayDeaths))}' />
 
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/tv5"
+                app:contenido="@{vm.contenido}" />
+
+<!--            <com.github.mikephil.charting.charts.BarChart-->
+<!--                android:id="@+id/barchart"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_below="@+id/chart"-->
+<!--                app:contenidoBarras="@{}" />          -->
 
         </RelativeLayout>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:contenido="@{vm.contenido}" />
+
 
     </LinearLayout>
 </layout>
