@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
 
         viewmodel.navegahacia.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(
+                findNavController()?.navigate(
                     MainFragmentDirections.actionMainFragmentToDetailFragment(
                         it
                     )

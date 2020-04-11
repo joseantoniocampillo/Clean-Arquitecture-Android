@@ -16,10 +16,20 @@
         android:layout_height="match_parent"
         tools:context=".ui.details.DetailFragment">
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.paisSelected.countryInfo.iso2}"
+            android:text="@{vm.paisSelected.country}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <com.github.mikephil.charting.charts.LineChart
+            app:contenido="@{vm.contenido}"
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

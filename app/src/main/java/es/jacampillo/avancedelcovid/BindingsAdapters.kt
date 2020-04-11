@@ -1,17 +1,23 @@
 package es.jacampillo.avancedelcovid
 
-import android.graphics.Typeface
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import es.jacampillo.avancedelcovid.models_api_response.DatosGraph
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.ui.main.MainFragment
 import es.jacampillo.avancedelcovid.ui.main.PaisesAdapter
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+
 
 @BindingAdapter("imgUrl")
 fun bindImage(imageView: ImageView, urlImg: String?) {
@@ -60,6 +66,23 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
         }
     }
 }
+
+@BindingAdapter("contenido")
+fun contenidoChart(chart: LineChart, dataObjects: Array<DatosGraph>){
+    val entries = ArrayList<Entry>()
+    for (dato in dataObjects){
+        entries.add(Entry(dato.ejeX, dato.ejeY))
+    }
+    val dataSet = LineDataSet(entries, "Esta es el label")
+    dataSet.color = R.color.texto_pricipal
+    dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
+    val lineData = LineData(dataSet)
+    chart.data = lineData
+    chart.invalidate() // refresh
+
+}
+
+
 
 
 /*------------------------------ UTILS ......................................*/
