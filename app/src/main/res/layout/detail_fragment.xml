@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="java.text.NumberFormat" />
-
         <variable
             name="vm"
             type="es.jacampillo.avancedelcovid.ui.details.DetailViewModel" />
-
     </data>
 
     <ScrollView
@@ -20,7 +17,7 @@
         <RelativeLayout
             android:id="@+id/detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".ui.details.DetailFragment">
 
             <ImageView
@@ -37,8 +34,8 @@
                 style="@style/TextviewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text='@{String.format("%s Casos", NumberFormat.getIntegerInstance().format(vm.paisSelected.cases))}' />
+                android:text='@{String.format("%s Casos", NumberFormat.getIntegerInstance().format(vm.paisSelected.cases))}'
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:id="@+id/tv3"
@@ -80,7 +77,6 @@
                 android:layout_below="@+id/tv6"
                 android:text='@{String.format("%s Nuevos casos", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayCases))}' />
 
-
             <TextView
                 android:id="@+id/tv8"
                 style="@style/TextviewStyle"
@@ -90,51 +86,12 @@
                 android:text='@{String.format("%s Fallecidos hoy", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayDeaths))}' />
 
             <com.github.mikephil.charting.charts.BarChart
+                android:layout_marginTop="12dp"
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:layout_below="@+id/tv8"
                 app:contenido="@{vm.historical}"/>
-
-<!--            <com.github.mikephil.charting.charts.LineChart-->
-<!--                android:id="@+id/chart2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:layout_below="@+id/chart"-->
-<!--                app:contenido="@{vm.fallecidos}"-->
-<!--                app:etiqueta="@{@string/char_fallecidos}"/>-->
-
-<!--            <com.github.mikephil.charting.charts.LineChart-->
-<!--                android:id="@+id/chart3"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:layout_below="@+id/chart2"-->
-<!--                app:contenido="@{vm.recuperados}"-->
-<!--                app:etiqueta="@{@string/char_recuperados}"/>-->
-
-
-
-<!--            <com.github.mikephil.charting.charts.BarChart-->
-<!--                android:id="@+id/chart2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:layout_below="@+id/chart"-->
-<!--                app:contenidoBarChart="@{vm.casos}" />-->
-
-            <!--            <com.github.mikephil.charting.charts.LineChart-->
-            <!--                android:id="@+id/chart3"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="300dp"-->
-            <!--                android:layout_below="@+id/chart2"-->
-            <!--                app:contenidoBarChart2="@{vm.contenido}" />-->
-
-
-            <!--            <com.github.mikephil.charting.charts.BarChart-->
-            <!--                android:id="@+id/barchart"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="300dp"-->
-            <!--                android:layout_below="@+id/chart"-->
-            <!--                app:contenidoBarras="@{}" />          -->
 
         </RelativeLayout>
     </ScrollView>

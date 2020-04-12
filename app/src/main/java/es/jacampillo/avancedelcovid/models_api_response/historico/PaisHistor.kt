@@ -1,12 +1,9 @@
 package es.jacampillo.avancedelcovid.models_api_response.historico
 
-
-import android.util.Log
 import androidx.annotation.Keep
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import org.json.JSONObject
 
 
 @Keep

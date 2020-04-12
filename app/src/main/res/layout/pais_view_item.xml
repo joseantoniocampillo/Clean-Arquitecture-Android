@@ -4,24 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="java.text.NumberFormat"/>
-
         <variable
             name="mfc"
             type="es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion" />
         <variable
             name="pais"
             type="es.jacampillo.avancedelcovid.models_api_response.Pais" />
-
     </data>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-
         app:cardBackgroundColor="#EBEFE6"
         app:cardCornerRadius="4dp"
         app:cardPreventCornerOverlap="true"
@@ -45,9 +40,9 @@
                 style="@style/TextviewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{pais.country}" />
+                android:text="@{pais.country}"
+                tools:ignore="RelativeOverlap" />
 
-            <!--            app:positivos="@{pais}"-->
             <TextView
                 android:id="@+id/tv2"
                 style="@style/TextviewStyle"
@@ -110,7 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv7"
                 android:text='@{String.format("%s Test por millón", NumberFormat.getIntegerInstance().format(pais.testsPerOneMillion))}' />
-
 
         </RelativeLayout>
 

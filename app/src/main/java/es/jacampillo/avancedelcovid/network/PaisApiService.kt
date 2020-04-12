@@ -29,10 +29,10 @@ private val retrofit = Retrofit.Builder()
 interface PaisApiService {
 
     @GET("countries")
-    fun getCountries():Deferred<List<Pais>>
+    fun getCountriesAsync():Deferred<List<Pais>>
 
     @GET("v2/historical/{pais}")
-    fun getDataGraficos(@Path("pais") paisId: String): Deferred<PaisHistor>
+    fun getDataGraficosAsync(@Path("pais") paisId: String): Deferred<PaisHistor>
 }
 
 object PaisesApi {

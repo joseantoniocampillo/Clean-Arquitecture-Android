@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/item_actualizar_fecha"
-        android:icon="@drawable/ic_refresh_black_24dp"
-        android:title="@string/actualizar_fecha"
-        app:showAsAction="ifRoom">
-    </item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/item_actualizar"
@@ -25,7 +17,6 @@
         android:id="@+id/item_ord_fallecidos_hoy"
         android:title="@string/ordenar_por_fallecidos_hoy" />
 
-
     <item
         android:id="@+id/item_ord_graves"
         android:title="@string/ordenar_por_graves" />
@@ -38,5 +29,10 @@
         android:id="@+id/item_ord_test_por_millon"
         android:title="@string/ordenar_por_test_por_millon" />
 
+    <item
+        android:id="@+id/item_actualizar_fecha"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:title="@string/actualizar_fecha">
+    </item>
 
 </menu>
