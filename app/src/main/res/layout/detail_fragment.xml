@@ -94,8 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:layout_below="@+id/tv8"
-                app:contenido="@{vm.historical}"
-                app:etiqueta="@{@string/char_casos}"/>
+                app:contenido="@{vm.historical}"/>
 
 <!--            <com.github.mikephil.charting.charts.LineChart-->
 <!--                android:id="@+id/chart2"-->
