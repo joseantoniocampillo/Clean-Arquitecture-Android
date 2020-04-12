@@ -62,31 +62,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
+                android:text='@{String.format("%s Graves", NumberFormat.getIntegerInstance().format(vm.paisSelected.critical))}' />
+
+            <TextView
+                android:id="@+id/tv6"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv5"
+                android:text='@{String.format("%s Tests por millón", NumberFormat.getIntegerInstance().format(vm.paisSelected.testsPerOneMillion))}' />
+
+            <TextView
+                android:id="@+id/tv7"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv6"
+                android:text='@{String.format("%s Nuevos casos", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayCases))}' />
+
+
+            <TextView
+                android:id="@+id/tv8"
+                style="@style/TextviewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv7"
                 android:text='@{String.format("%s Fallecidos hoy", NumberFormat.getIntegerInstance().format(vm.paisSelected.todayDeaths))}' />
 
-            <com.github.mikephil.charting.charts.LineChart
+            <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@+id/tv5"
-                app:contenido="@{vm.casos}"
+                android:layout_height="420dp"
+                android:layout_below="@+id/tv8"
+                app:contenido="@{vm.historical}"
                 app:etiqueta="@{@string/char_casos}"/>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart2"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@+id/chart"
-                app:contenido="@{vm.fallecidos}"
-                app:etiqueta="@{@string/char_fallecidos}"/>
+<!--            <com.github.mikephil.charting.charts.LineChart-->
+<!--                android:id="@+id/chart2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_below="@+id/chart"-->
+<!--                app:contenido="@{vm.fallecidos}"-->
+<!--                app:etiqueta="@{@string/char_fallecidos}"/>-->
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart3"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@+id/chart2"
-                app:contenido="@{vm.recuperados}"
-                app:etiqueta="@{@string/char_recuperados}"/>
+<!--            <com.github.mikephil.charting.charts.LineChart-->
+<!--                android:id="@+id/chart3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_below="@+id/chart2"-->
+<!--                app:contenido="@{vm.recuperados}"-->
+<!--                app:etiqueta="@{@string/char_recuperados}"/>-->
 
 
 

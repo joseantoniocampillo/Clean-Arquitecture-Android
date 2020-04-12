@@ -16,4 +16,6 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
     <color name="negro">#000000</color>
+    <color name="black">#000000</color>
+    <color name="verde">#69F0AE</color>
 </resources>

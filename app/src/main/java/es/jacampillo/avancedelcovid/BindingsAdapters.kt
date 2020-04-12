@@ -1,5 +1,6 @@
 package es.jacampillo.avancedelcovid
 
+import android.graphics.Color
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,9 +8,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.data.*
-import es.jacampillo.avancedelcovid.models_api_response.DatosGraph
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.models_api_response.historico.PaisHistor
 import es.jacampillo.avancedelcovid.ui.main.MainFragment
@@ -84,76 +87,56 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
 //    }
 //}
 
-@BindingAdapter("etiqueta","contenido")
-fun contenidoChart(chart: LineChart, etiqueta: String? = "", historical: PaisHistor? = null){
-    val entries = ArrayList<Entry>()
+@BindingAdapter("contenido")
+fun contenidoChart(chart: BarChart, historical: PaisHistor?){
     historical?.let{
+        val listaFallecidos = it.timeline.deaths.lista
+        val listaCurados = it.timeline.recovered.lista
 
-        for (dato in contenido){
-            entries.add(Entry(dato.ejeX, dato.ejeY))
+        val indexes: List<String> =
+            ArrayList<String>(listaFallecidos.keys) // <== Set to List
+
+        val listaBarEntryFallecidos = listaFallecidos.map { BarEntry(indexes.indexOf(it.key).toFloat(),it.value.toFloat()) }
+        val listaBarEntryCurados = listaCurados.map { BarEntry(indexes.indexOf(it.key).toFloat(),it.value.toFloat()) }
+        val fechas = listaFallecidos.map { it.key }.toTypedArray()
+
+        val formatter: ValueFormatter =
+            object : ValueFormatter() {
+                override fun getAxisLabel(value: Float, axis: AxisBase): String {
+                    return fechas[(value).toInt()]
+                }
+            }
+        val xAxis = chart.xAxis
+        xAxis.granularity = 1f // minimum axis-step (interval) is 1
+        xAxis.valueFormatter = formatter
+
+        val barDataSetFallecidos = BarDataSet(listaBarEntryFallecidos, "Fallecidos")
+        val barDataSetCurados = BarDataSet(listaBarEntryCurados, "Recuperados")
+
+
+        barDataSetFallecidos.color = Color.BLACK
+        barDataSetCurados.color = Color.GREEN
+
+        val groupSpace = 0.06f
+        val barSpace = 0.02f // x2 dataset
+
+        val barWidth = 0.45f // x2 dataset
+
+        // (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
+        // (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
+        val barData = BarData(barDataSetFallecidos, barDataSetCurados)
+        barData.barWidth = barWidth // set the width of each bar
+
+        chart.apply {
+            axisRight.isEnabled = false
+            description.isEnabled = false
+            setData(barData)
+            groupBars(1f, groupSpace, barSpace) // perform the "explicit" grouping
+            invalidate() // refresh
         }
-        val dataSet = LineDataSet(entries, etiqueta)
-        dataSet.color = R.color.negro
-        dataSet.setValueTextColor(R.color.secondaryColor); // styling, ..
 
-        val dataSet2 = LineDataSet(entries, etiqueta)
-        dataSet2.color = R.color.negro
-        dataSet2.setValueTextColor(R.color.secondaryColor); // styling, ..
-
-        val dataSet3 = LineDataSet(entries, etiqueta)
-        dataSet3.color = R.color.negro
-        dataSet3.setValueTextColor(R.color.secondaryColor); // styling, ..
-
-
-        val lineData = LineData(dataSet)
-        chart.data = lineData
-        chart.description.setEnabled(false);
-        chart.invalidate() // refresh
     }
 }
-
-
-
-@BindingAdapter("contenidoBarChart")
-fun contenidoChartBarras(chart: BarChart, dataObjects: ArrayList<DatosGraph>?){
-    val entries = ArrayList<BarEntry>()
-    dataObjects?.let{
-        for (dato in dataObjects){
-            entries.add(BarEntry(dato.ejeX, dato.ejeY))
-        }
-//        chart.setDrawBarShadow(false);
-//        chart.setDrawValueAboveBar(true);
-//        chart.getDescription().setEnabled(false);
-//
-//        // scaling can now only be done on x- and y-axis separately
-//        chart.setPinchZoom(false);
-//
-//        chart.setDrawGridBackground(false);
-//        val l = chart.legend
-//        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-//        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-//        l.orientation = Legend.LegendOrientation.HORIZONTAL
-//        l.setDrawInside(false)
-//        l.form = LegendForm.SQUARE
-//        l.formSize = 9f
-//        l.textSize = 11f
-//        l.xEntrySpace = 4f
-
-
-        var set1 = BarDataSet(entries, "Fallecidos cada día")
-
-        //-------
-        val data = BarData(set1)
-        data.setValueTextSize(10f)
-        //data.setValueTypeface(tfLight)
-        data.barWidth = 0.9f
-
-
-        chart.data = data
-    }
-}
-
-
 
 
 /*------------------------------ UTILS ......................................*/

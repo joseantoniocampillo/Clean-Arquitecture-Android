@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import es.jacampillo.avancedelcovid.R
@@ -32,6 +33,8 @@ class MainFragment : Fragment() {
 
     }
 
+    lateinit var navcotroler: NavController
+
     private val viewmodel: MainViewModel by lazy {
         val activity = requireNotNull(this.activity)
         val factory = MainViewModel.Factory(activity.application)
@@ -45,6 +48,8 @@ class MainFragment : Fragment() {
     ): View {
         val binding = MainFragmentBinding.inflate(inflater)
 
+        navcotroler = this.findNavController()
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodelo = viewmodel
         binding.paisesRecyclerView.adapter = PaisesAdapter(PaisListener {
@@ -53,7 +58,7 @@ class MainFragment : Fragment() {
 
         viewmodel.navegahacia.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController()?.navigate(
+                navcotroler.navigate(
                     MainFragmentDirections.actionMainFragmentToDetailFragment(
                         it
                     )
