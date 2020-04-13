@@ -5,13 +5,19 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
+        }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.1"
+
+        // Realm
+        classpath "io.realm:realm-gradle-plugin:6.0.2"
     }
 }
 
@@ -20,7 +26,13 @@ allprojects {
         google()
         jcenter()
         // Requerido por MPAndroidChart
-        maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://jitpack.io'
+        }
+        // Requerido para Realm
+        maven {
+            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
+        }
     }
 }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import es.jacampillo.avancedelcovid.database.PaisesDatabase
 import es.jacampillo.avancedelcovid.database.asDatabasePaises
 import es.jacampillo.avancedelcovid.database.asPaisDomain
+import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.models_api_response.historico.PaisHistor
 import es.jacampillo.avancedelcovid.network.PaisesApi
 import kotlinx.coroutines.*
@@ -31,5 +32,9 @@ class Repositorio(private val database: PaisesDatabase) {
         .map(database.paisesDao.getFromDatabase(int)) {
             it.asPaisDomain()
         }
+
+    fun damepaisesIntet(): Deferred<List<Pais>>{
+        return PaisesApi.retrofitService.getCountriesAsync()
+    }
 }
 
