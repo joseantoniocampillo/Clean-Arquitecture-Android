@@ -93,6 +93,15 @@
                 android:layout_below="@+id/tv8"
                 app:contenido="@{vm.historical}"/>
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_marginTop="12dp"
+                android:id="@+id/chart2"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:layout_below="@+id/chart"
+                app:historical="@{vm.historical}"/>
+
+
         </RelativeLayout>
     </ScrollView>
 

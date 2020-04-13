@@ -1,7 +1,9 @@
 package es.jacampillo.avancedelcovid
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -59,11 +61,13 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
         if (esEste) {
             tv.apply {
                 textSize = 16f
+                @Suppress("DEPRECATION")
                 setTextColor(resources.getColor(R.color.texto_resaltado))
             }
         } else {
             tv.apply {
                 textSize = 12f
+                @Suppress("DEPRECATION")
                 setTextColor(resources.getColor(R.color.texto_pricipal))
             }
         }
@@ -87,17 +91,70 @@ fun enNegrita(tv: TextView, esEste: Boolean?) {
 //    }
 //}
 
+@BindingAdapter("historical")
+fun historicalToChart(chart: BarChart, historical: PaisHistor?){
+    historical?.let {
+        val listaFallecidos = it.timeline.deaths.lista
+//        listaFallecidos.forEach{
+//            Log.d("ttt_iter", "fallecidos: ${it}")
+//        }
+        val diarios: ArrayList<Float> = ArrayList()
+        //para que coindidan con los items de las fechas
+        diarios.add(0f)
+        var control = 0
+        for (item in listaFallecidos){
+            if (control != 0)
+                diarios.add( (item.value - control).toFloat())
+            control = item.value
+        }
+//        diarios.forEach{
+//            Log.d("ttt_iter", "filtrados: ${it}")
+//        }
+        val diariosFloat = diarios.toFloatArray()
+
+        val indexes: List<String> =
+            ArrayList<String>(listaFallecidos.keys)
+
+        val listaBarEntryFallecidos =
+            listaFallecidos.map { BarEntry(indexes.indexOf(it.key).toFloat(), diariosFloat.get(indexes.indexOf(it.key)))}
+
+
+        val fechas = listaFallecidos.map { it.key }.toTypedArray()
+        val formatter: ValueFormatter =
+            object : ValueFormatter() {
+                override fun getAxisLabel(value: Float, axis: AxisBase): String {
+                    return fechas[(value).toInt()]
+                }
+            }
+        val xAxis = chart.xAxis
+        xAxis.granularity = 1f // minimum axis-step (interval) is 1
+        xAxis.valueFormatter = formatter
+        val barDataSetFallecidos = BarDataSet(listaBarEntryFallecidos, "Fallecidos Al día")
+        barDataSetFallecidos.color = Color.RED
+
+        val data = BarData(barDataSetFallecidos)
+        data.barWidth = 0.9f // set custom bar width
+        chart.axisLeft.isEnabled = false
+        chart.data = data
+        chart.setFitBars(true) // make the x-axis fit exactly all bars
+        chart.description.isEnabled = false
+        chart.invalidate()
+    }
+}
+
 @BindingAdapter("contenido")
-fun contenidoChart(chart: BarChart, historical: PaisHistor?){
-    historical?.let{
+fun contenidoChart(chart: BarChart, historical: PaisHistor?) {
+    historical?.let {
         val listaFallecidos = it.timeline.deaths.lista
         val listaCurados = it.timeline.recovered.lista
 
         val indexes: List<String> =
             ArrayList<String>(listaFallecidos.keys) // <== Set to List
 
-        val listaBarEntryFallecidos = listaFallecidos.map { BarEntry(indexes.indexOf(it.key).toFloat(),it.value.toFloat()) }
-        val listaBarEntryCurados = listaCurados.map { BarEntry(indexes.indexOf(it.key).toFloat(),it.value.toFloat()) }
+        val listaBarEntryFallecidos =
+            listaFallecidos.map { BarEntry(indexes.indexOf(it.key).toFloat(), it.value.toFloat()) }
+        val listaBarEntryCurados =
+            listaCurados.map { BarEntry(indexes.indexOf(it.key).toFloat(), it.value.toFloat()) }
         val fechas = listaFallecidos.map { it.key }.toTypedArray()
 
         val formatter: ValueFormatter =
@@ -113,13 +170,11 @@ fun contenidoChart(chart: BarChart, historical: PaisHistor?){
         val barDataSetFallecidos = BarDataSet(listaBarEntryFallecidos, "Fallecidos")
         val barDataSetCurados = BarDataSet(listaBarEntryCurados, "Recuperados")
 
-
         barDataSetFallecidos.color = Color.BLACK
         barDataSetCurados.color = Color.GREEN
 
         val groupSpace = 0.06f
         val barSpace = 0.02f // x2 dataset
-
         val barWidth = 0.45f // x2 dataset
 
         // (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
@@ -128,13 +183,12 @@ fun contenidoChart(chart: BarChart, historical: PaisHistor?){
         barData.barWidth = barWidth // set the width of each bar
 
         chart.apply {
-            axisRight.isEnabled = false
+            axisLeft.isEnabled = false
             description.isEnabled = false
             setData(barData)
             groupBars(1f, groupSpace, barSpace) // perform the "explicit" grouping
             invalidate() // refresh
         }
-
     }
 }
 
@@ -142,6 +196,7 @@ fun contenidoChart(chart: BarChart, historical: PaisHistor?){
 /*------------------------------ UTILS ......................................*/
 
 //SimpleDateFormat("yyyy.MM.dd HH:mm")
+@SuppressLint("SimpleDateFormat")
 fun Long.toDateFormat(): String {
     val date = Date(this)
     val format = SimpleDateFormat("HH:mm dd.MM.yy ")
