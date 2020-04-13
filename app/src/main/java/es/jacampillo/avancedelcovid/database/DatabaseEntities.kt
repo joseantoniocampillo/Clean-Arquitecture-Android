@@ -3,12 +3,8 @@ package es.jacampillo.avancedelcovid.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import es.jacampillo.avancedelcovid.db_realm.PaisRmObj
 import es.jacampillo.avancedelcovid.models_api_response.CountryInfo
 import es.jacampillo.avancedelcovid.models_api_response.Pais
-import io.realm.Realm
-import io.realm.RealmList
-import io.realm.kotlin.createObject
 
 @Entity
 class DatabasePais constructor(
@@ -94,29 +90,29 @@ fun List<Pais>.asDatabasePaises(): List<DatabasePais>{
 
 
 // Realm
-fun List<Pais>.asListDatabasePaisesRealM(realm: Realm){
-    val lista : List<PaisRmObj> =  map {
-        PaisRmObj(
-            country = it.country,
-            countryInfoRm = it.countryInfo,
-            critical = it.critical,
-            deaths = it.deaths,
-            deathsPerOneMillion = it.deathsPerOneMillion,
-            recovered = it.recovered,
-            todayCases = it.todayCases,
-            todayDeaths = it.todayDeaths,
-            updated = it.updated,
-            active = it.active,
-            cases = it.cases,
-            casesPerOneMillion = it.casesPerOneMillion,
-            tests = it.tests,
-            testsPerOneMillion = it.testsPerOneMillion
-        )
-    }
-    realm.beginTransaction()
-    lista.forEach {
-        realm.copyToRealm(it)
-    }
-    realm.commitTransaction()
-
-}
+//fun List<Pais>.asListDatabasePaisesRealM(realm: Realm){
+//    val lista : List<PaisRmObj> =  map {
+//        PaisRmObj(
+//            country = it.country,
+//            countryInfoRm = it.countryInfo,
+//            critical = it.critical,
+//            deaths = it.deaths,
+//            deathsPerOneMillion = it.deathsPerOneMillion,
+//            recovered = it.recovered,
+//            todayCases = it.todayCases,
+//            todayDeaths = it.todayDeaths,
+//            updated = it.updated,
+//            active = it.active,
+//            cases = it.cases,
+//            casesPerOneMillion = it.casesPerOneMillion,
+//            tests = it.tests,
+//            testsPerOneMillion = it.testsPerOneMillion
+//        )
+//    }
+//    realm.beginTransaction()
+//    lista.forEach {
+//        realm.copyToRealm(it)
+//    }
+//    realm.commitTransaction()
+//
+//}

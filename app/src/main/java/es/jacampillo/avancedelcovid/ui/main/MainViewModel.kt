@@ -15,7 +15,6 @@ import es.jacampillo.avancedelcovid.toDateFormat
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import es.jacampillo.avancedelcovid.R
-import es.jacampillo.avancedelcovid.db_realm.ingresarPaises
 import es.jacampillo.avancedelcovid.orden
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS_HOY
@@ -65,19 +64,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val realmpaises : LiveData<List<Pais>> get() = _realmpaises
 
     private fun paisesRepoRM(){
-        coroutineScope.launch {
-            val valor = paisesRepositorio.damepaisesIntet().await()
-            _realmpaises.value = valor
-        }
-        realmpaises.value?.forEach{
-            Log.d("repo", it.country)
-            //// optional - ReactiveStreams support for LiveData
-            //        implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-        }
+//        coroutineScope.launch {
+//            val valor = paisesRepositorio.damepaisesIntet().await()
+//            _realmpaises.value = valor
+//        }
+//        realmpaises.value?.forEach{
+//            Log.d("repo", it.country)
+//            //// optional - ReactiveStreams support for LiveData
+//            //        implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+//        }
     }
 
     init {
-        paisesRepoRM()
+        //paisesRepoRM()
 
         refreshFromRepository()
         _selection.value = POSITIVOS
