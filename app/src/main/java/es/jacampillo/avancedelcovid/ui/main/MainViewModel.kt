@@ -71,6 +71,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         realmpaises.value?.forEach{
             Log.d("repo", it.country)
+            //// optional - ReactiveStreams support for LiveData
+            //        implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
         }
     }
 
