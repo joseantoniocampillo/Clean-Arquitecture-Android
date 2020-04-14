@@ -87,32 +87,3 @@ fun List<Pais>.asDatabasePaises(): List<DatabasePais>{
         )
     }
 }
-
-
-// Realm
-//fun List<Pais>.asListDatabasePaisesRealM(realm: Realm){
-//    val lista : List<PaisRmObj> =  map {
-//        PaisRmObj(
-//            country = it.country,
-//            countryInfoRm = it.countryInfo,
-//            critical = it.critical,
-//            deaths = it.deaths,
-//            deathsPerOneMillion = it.deathsPerOneMillion,
-//            recovered = it.recovered,
-//            todayCases = it.todayCases,
-//            todayDeaths = it.todayDeaths,
-//            updated = it.updated,
-//            active = it.active,
-//            cases = it.cases,
-//            casesPerOneMillion = it.casesPerOneMillion,
-//            tests = it.tests,
-//            testsPerOneMillion = it.testsPerOneMillion
-//        )
-//    }
-//    realm.beginTransaction()
-//    lista.forEach {
-//        realm.copyToRealm(it)
-//    }
-//    realm.commitTransaction()
-//
-//}
