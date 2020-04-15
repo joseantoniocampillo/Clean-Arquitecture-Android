@@ -25,11 +25,11 @@ import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST_POR_MILLON
 import java.text.NumberFormat
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(context: Context) : ViewModel() {
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-    private val paisesRepositorio = Repositorio(getDatabase(application))
+    private val paisesRepositorio = Repositorio(getDatabase(context))
 
     private val _selection = MutableLiveData<Int>()
     val selection: LiveData<Int> get() = _selection
@@ -95,11 +95,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelJob.cancel()
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(app) as T
+                return MainViewModel(context) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

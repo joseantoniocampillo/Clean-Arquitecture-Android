@@ -1,0 +1,112 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "53216af967bc751ec702d771252ad57e",
+    "entities": [
+      {
+        "tableName": "DatabasePais",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`country` TEXT NOT NULL, `countryInfo` TEXT, `critical` INTEGER, `deaths` INTEGER, `deathsPerOneMillion` REAL, `recovered` INTEGER, `todayCases` INTEGER, `todayDeaths` INTEGER, `updated` INTEGER, `active` INTEGER, `cases` INTEGER, `casesPerOneMillion` REAL, `tests` INTEGER, `testsPerOneMillion` INTEGER, PRIMARY KEY(`country`))",
+        "fields": [
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countryInfo",
+            "columnName": "countryInfo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "critical",
+            "columnName": "critical",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deaths",
+            "columnName": "deaths",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deathsPerOneMillion",
+            "columnName": "deathsPerOneMillion",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "recovered",
+            "columnName": "recovered",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "todayCases",
+            "columnName": "todayCases",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "todayDeaths",
+            "columnName": "todayDeaths",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updated",
+            "columnName": "updated",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "active",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cases",
+            "columnName": "cases",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "casesPerOneMillion",
+            "columnName": "casesPerOneMillion",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tests",
+            "columnName": "tests",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "testsPerOneMillion",
+            "columnName": "testsPerOneMillion",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "country"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '53216af967bc751ec702d771252ad57e')"
+    ]
+  }
+}

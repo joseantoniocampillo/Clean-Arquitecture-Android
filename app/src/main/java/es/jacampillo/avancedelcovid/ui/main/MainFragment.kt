@@ -13,6 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import es.jacampillo.avancedelcovid.R
 import es.jacampillo.avancedelcovid.databinding.MainFragmentBinding
+import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
+//import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+//import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainFragment : Fragment() {
 
@@ -35,12 +42,14 @@ class MainFragment : Fragment() {
 
     lateinit var navcotroler: NavController
 
-    private val viewmodel: MainViewModel by lazy {
-        val activity = requireNotNull(this.activity)
-        val factory = MainViewModel.Factory(activity.application)
-        ViewModelProvider(this, factory)
-            .get(MainViewModel::class.java)
-    }
+//    private val viewmodel: MainViewModel by lazy {
+//        val activity = requireNotNull(this.activity)
+//        val factory = MainViewModel.Factory(activity.application)
+//        ViewModelProvider(this, factory)
+//            .get(MainViewModel::class.java)
+//    }
+// Lazy Inject ViewModel
+    val viewmodel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
