@@ -49,7 +49,7 @@ class MainFragment : Fragment() {
 //            .get(MainViewModel::class.java)
 //    }
 // Lazy Inject ViewModel
-    val viewmodel: MainViewModel by viewModel()
+    private val viewmodel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

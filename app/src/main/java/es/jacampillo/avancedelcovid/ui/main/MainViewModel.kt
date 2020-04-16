@@ -1,29 +1,21 @@
 package es.jacampillo.avancedelcovid.ui.main
 
-import android.app.Application
 import android.content.Context
-import android.net.ConnectivityManager
 import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import es.jacampillo.avancedelcovid.database.getDatabase
 import es.jacampillo.avancedelcovid.models_api_response.Pais
 import es.jacampillo.avancedelcovid.repo.Repositorio
 import es.jacampillo.avancedelcovid.toDateFormat
-import kotlinx.coroutines.*
-import retrofit2.HttpException
-import es.jacampillo.avancedelcovid.R
 import es.jacampillo.avancedelcovid.orden
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.FALLECIDOS_HOY
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.GRAVES
 import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.POSITIVOS
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.RECUPERADOS
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST
-import es.jacampillo.avancedelcovid.ui.main.MainFragment.Companion.TEST_POR_MILLON
-import java.text.NumberFormat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MainViewModel(context: Context) : ViewModel() {
 
@@ -95,15 +87,19 @@ class MainViewModel(context: Context) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    class Factory(val context: Context) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MainViewModel(context) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
-    }
+
+  /*  Despues de inyección de dependendias con koin no se requiso el Factory nativo para construir
+    instancias del Viewmodels con parametros  */
+
+//    class Factory(val context: Context) : ViewModelProvider.Factory {
+//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+//                @Suppress("UNCHECKED_CAST")
+//                return MainViewModel(context) as T
+//            }
+//            throw IllegalArgumentException("Unable to construct viewmodel")
+//        }
+//    }
 
 //    fun Int.formatoCastellano(int : Int): String{
 //        return NumberFormat.getIntegerInstance().format(int)
